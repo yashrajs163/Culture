@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management</title>
+</head>
+<body>
+    <h1>Projects</h1>
+    <ul>
+        {% for project in projects %}
+            <li>
+                <strong>{{ project.title }}</strong><br>
+                Description: {{ project.description }}<br>
+                Start Date: {{ project.start_date }}<br>
+                End Date: {{ project.end_date }}<br>
+                Status: {{ project.status }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Create Project</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br>
+        <label for="start_date">Start Date:</label><br>
+        <input type="date" id="start_date" name="start_date"><br>
+        <label for="end_date">End Date:</label><br>
+        <input type="date" id="end_date" name="end_date"><br>
+        <label for="status">Status:</label><br>
+        <select id="status" name="status">
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="On Hold">On Hold</option>
+        </select><br>
+        <button type="submit">Create Project</button>
+    </form>
+</body>
+</html>

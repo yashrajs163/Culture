@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Include your static JavaScript file -->
+    <script src="{% static 'js/task_management.js' %}"></script>
+    <style>
+        .column {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            height: 50vh;
+            /* width: 40vh; */
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .task-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .task-item h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .task-item strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-5 text-center">Task Management System</h1>
+
+        <div class="row">
+            <div class="col">
+                <div class="column" id="To Do">
+                    <h2 class="text-center mb-4">To Do</h2>
+                    {% for task in todo_tasks %}
+                        <div class="task-item" id="task{{ task.id }}">
+                            <strong>{{ task.title }}</strong><br>
+                            Description: {{ task.description }}<br>
+                            Assigned User: {% if task.assigned_user %}{{ task.assigned_user.username }}{% else %}Unassigned{% endif %}<br>
+                            Due Date: {{ task.due_date }}<br>
+                            Priority: {{ task.priority }}<br>
+                            Status: {{ task.status }}<br>
+                            Assignment Status: {{ task.assignment_status }}<br>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="column" id="In Progress">
+                    <h2 class="text-center mb-4">In Progress</h2>
+                    {% for task in inprogress_tasks %}
+                        <div class="task-item" id="task{{ task.id }}">
+                            <strong>{{ task.title }}</strong><br>
+                            Description: {{ task.description }}<br>
+                            Assigned User: {% if task.assigned_user %}{{ task.assigned_user.username }}{% else %}Unassigned{% endif %}<br>
+                            Due Date: {{ task.due_date }}<br>
+                            Priority: {{ task.priority }}<br>
+                            Status: {{ task.status }}<br>
+                            Assignment Status: {{ task.assignment_status }}<br>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="column" id="Done">
+                    <h2 class="text-center mb-4">Done</h2>
+                    {% for task in done_tasks %}
+                        <div class="task-item" id="task{{ task.id }}">
+                            <strong>{{ task.title }}</strong><br>
+                            Description: {{ task.description }}<br>
+                            Assigned User: {% if task.assigned_user %}{{ task.assigned_user.username }}{% else %}Unassigned{% endif %}<br>
+                            Due Date: {{ task.due_date }}<br>
+                            Priority: {{ task.priority }}<br>
+                            Status: {{ task.status }}<br>
+                            Assignment Status: {{ task.assignment_status }}<br>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="csrf-form">{% csrf_token %}</form>
+</body>
+</html>
+
+    <!-- Task creation form -->
+    <!-- <h2>Create Task</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Task</button>
+    </form>
+</body>
+</html> -->
